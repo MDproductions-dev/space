@@ -55,8 +55,25 @@
       left:50%; 
       position:fixed
     }
+    .nojs{
+      display:none;
+    }
   </style>
+  <noscript>
+  <style>
+    .space
+    { 
+      display: none;
+    }
+    .nojs{
+      display: block;
+    }
+  </style>  
+  </noscript>
   <body style="background-color:black;">
+    <div id="nojs" class="nojs">
+      PLEASE ENABLE JAVASCRIPT FOR THIS TABLET TO WORK
+    </div>
     <div id="space" class="space">
       REBOOTING UNIVERSE
       <br>
