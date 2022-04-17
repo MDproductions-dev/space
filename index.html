@@ -1,0 +1,157 @@
+<!doctype html>
+
+<html class="no-js" lang="nl">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Rebooting Universe...</title>
+  <meta name="og:title" content="Rebooting Universe - Please stand by">
+  <meta name="twitter:title" content="Rebooting Universe - Please stand by"/>
+
+  <meta name="description" content="Rebooting Universe - Please stand by">
+  <meta name="og:description" content="Rebooting Universe - Please stand by">
+  <meta name="twitter:description" content="Rebooting Universe - Please stand by" />
+  <meta name="twitter:card" content="summary"/>
+  <meta property="og:url" content="https://www.mdproductions.nl/space/" />
+  
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0">
+</head>
+  <style>
+    @font-face {
+      font-family: "Courier-PS-Bold";
+      src: url("https://www.mdproductions.nl/fonts/Courier-PS-Bold.ttf");
+    }  
+    body {text-align: center; background-color:black; color:#66FF99; font-size:1.3rem; font-family:"Courier-PS-Bold", serif;}
+    a {color:blue; text-decoration:none;}
+    div {justify-content: center;}
+    
+    .standby {
+      text-align:center;
+    }
+    .standby span {
+      display:inline-block;
+      width:100px;
+      text-align:left;
+    }
+    .Progress {
+      margin: auto;
+      max-width: 500px;
+      width: 40%;
+      border: 3px solid green;
+      padding:4px 3px 3px 3px;
+    }
+    .Bar {
+      width: 10%;
+      height: 30px;
+      background-color: #04AA6D;
+      text-align: right;
+      line-height: 30px;
+      color: white;
+    }
+    .space{
+      width:100%; 
+      transform: translate(-50%, -50%); 
+      top:50%; 
+      left:50%; 
+      position:fixed
+    }
+  </style>
+  <body style="background-color:black;">
+    <div id="space" class="space">
+      REBOOTING UNIVERSE
+      <br>
+      <div class="standby">
+        <span></span>PLEASE STAND BY<span style="padding-left:5px;" id="blinkingbox">■</span>
+      </div>
+      <br>
+      <div class="Progress">
+        <div id="progressbar" class="Bar"></div>
+        <p id="percentage" style="margin-top: -24px; margin-bottom:-2px; margin-right:6px; text-align:right;">25.55%</p>
+      </div>
+      <br>
+      ESTIMATED TIME REMAINING:
+      <br>
+      <p style="margin: 0; padding: 0;" id="timeremaining">20 DAYS 23 HOURS 59 MINUTES 55 SECONDS</p>
+    </div>
+  </body>
+  <script>
+    var blinkon = true
+    setInterval(function(){
+      if (blinkon){
+        document.getElementById("blinkingbox").style.visibility = "hidden"
+        blinkon = false
+      }
+      else{
+        document.getElementById("blinkingbox").style.visibility = "visible"
+        blinkon = true
+      }
+    }, 400)
+    
+    const second = 1000,
+          minute = second * 60,
+          hour = minute * 60,
+          day = hour * 24;
+
+    let space = "May 2, 2022 17:00:00",
+        spacebegin = "Apr 4, 2022 17:00:00",
+        timezoneoffset = new Date(space).getTimezoneOffset(),
+        countDown = new Date(space).getTime() - (timezoneoffset * 60000),
+        countDown2 = new Date(spacebegin).getTime() - (timezoneoffset * 60000),
+        x = setInterval(function() {
+
+          stt = Number(new Date().getTime() + 1000)
+          let now = stt,
+              distance = countDown - now;
+          
+          var percentage = Math.floor(((countDown2 - now) / (countDown2 - countDown) * 100 + Number.EPSILON) * 100) / 100;
+          
+          if (distance < 1) {
+            document.getElementById("percentage").innerText = "100%"
+            document.getElementById("progressbar").style.width = "100%"
+            document.getElementById("timeremaining").innerText = "00 DAYS 00 HOURS 00 MINUTES 00 SECONDS"
+            clearInterval(x);
+            return;
+          }
+          
+          if (percentage === 100){
+            document.getElementById("percentage").innerText = "100%"
+            document.getElementById("progressbar").style.width = "100%"
+          }
+          else{
+            document.getElementById("percentage").innerText = percentage.toFixed(2).toString() + "%"
+            document.getElementById("progressbar").style.width = percentage.toFixed(2).toString() + "%"
+          }
+
+          document.getElementById("timeremaining").innerText = makeMeTwoDigits(Math.floor(distance / (day))) + " DAYS " + makeMeTwoDigits(Math.floor((distance % (day)) / (hour))) + " HOURS " + makeMeTwoDigits(Math.floor((distance % (hour)) / (minute))) + " MINUTES " + makeMeTwoDigits(Math.floor((distance % (minute)) / second)) + " SECONDS" 
+
+        }, 1000)
+        stt = Number(new Date().getTime() + 1000)
+        let now = stt,
+            distance = countDown - now;
+    
+        if (distance < 1) {
+          document.getElementById("percentage").innerText = "100%"
+          document.getElementById("progressbar").style.width = "100%"
+          document.getElementById("timeremaining").innerText = "00 DAYS 00 HOURS 00 MINUTES 00 SECONDS"
+          clearInterval(x);
+        }
+        else{
+          var percentage = Math.floor(((countDown2 - now) / (countDown2 - countDown) * 100 + Number.EPSILON) * 100) / 100;
+
+          if (percentage === 100){
+            document.getElementById("percentage").innerText = "100%"
+            document.getElementById("progressbar").style.width = "100%"
+          }
+          else{
+            document.getElementById("percentage").innerText = percentage.toFixed(2).toString() + "%"
+            document.getElementById("progressbar").style.width = percentage.toFixed(2).toString() + "%"
+          }
+
+          document.getElementById("timeremaining").innerText = makeMeTwoDigits(Math.floor(distance / (day))) + " DAYS " + makeMeTwoDigits(Math.floor((distance % (day)) / (hour))) + " HOURS " + makeMeTwoDigits(Math.floor((distance % (hour)) / (minute))) + " MINUTES " + makeMeTwoDigits(Math.floor((distance % (minute)) / second)) + " SECONDS" 
+        }
+    
+        function makeMeTwoDigits(n){
+            return (n < 10 ? "0" : "") + n;
+        }
+  </script>
+</html>
