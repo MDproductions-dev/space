@@ -156,6 +156,9 @@
           document.getElementById("progressbar").style.width = "100%"
           document.getElementById("timeremaining").innerText = "00 DAYS 00 HOURS 00 MINUTES 00 SECONDS"
           clearInterval(x);
+          setTimeout(function(){
+            window.location = "https://www.youtube.com/watch?v=xAOv_zvXBQk"
+          }, 2000)
         }
         else{
           var percentage = Math.floor(((countDown2 - now) / (countDown2 - countDown) * 100 + Number.EPSILON) * 100) / 100;
